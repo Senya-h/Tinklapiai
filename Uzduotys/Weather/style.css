@@ -1,0 +1,71 @@
+#imageBackground {
+    background: url(https://previews.123rf.com/images/_ig0rzh_/_ig0rzh_1501/_ig0rzh_150100029/35596644-weather-forecast-concept-background-variety-weather-conditions-bright-sun-and-blue-sky-dark-stormy-s.jpg);
+    height: 200px;
+    background-size: cover;
+    background-position: center;
+}
+
+.scroll {
+    overflow: auto;
+    white-space: nowrap;
+}
+
+#currentCity {
+    color: #fff;
+}
+
+/*Day related styles */
+
+.weatherByDay {
+    background-color: #fff;
+    width: 130px;
+    display: inline-block;
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+}
+
+.weatherByDay .row p {
+    font-size: 18px;
+    margin-bottom: 0;
+    text-align: center;
+}
+
+.selectedDay {
+    background-color: #ddd;
+}
+
+/*Hour related styles */
+
+.weatherByHour {
+    border-left: 1px solid #000;
+    border-right: 1px solid #000;
+    text-align: center;
+}
+
+#hourlyWeatherContainer {
+    background-color: #c7ad65;
+}
+
+.weatherByHour .weatherHourIcon {
+    font-size: 40px;
+    text-align: center;
+    margin: 0 auto;
+}
+
+/* Icons */
+
+.wi-day-sunny {
+    color: #ffea00;
+}
+
+.precipitationIcon {
+    font-size: 30px;
+}
+
+.wi-wind {
+    font-size: 30px;
+}
+
+.weatherByDay .wi {
+    font-size: 40px;
+}

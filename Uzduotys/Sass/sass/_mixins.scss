@@ -1,0 +1,4 @@
+@mixin rounded_corners($radius, $color) {
+  border-radius: $radius;
+  color: $color;
+}

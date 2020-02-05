@@ -1,0 +1,57 @@
+.navSearch {
+  display: flex;
+  flex-direction: row;
+
+  form {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+header {
+  #notFound {
+    font-size: 18px;
+    margin-bottom: 0;
+    padding-bottom: 10px;
+    display: none;
+  }
+}
+
+#wideTable {
+  display: block;
+}
+
+#narrowTable {
+  display: none;
+}
+
+
+@media(max-width: 768px) {
+  .navSearch {
+    flex-direction: column;
+    width: 100%;
+
+    .navbar-brand {
+      text-align: center;
+      margin: 0;
+    }
+
+    form {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    button {
+      margin-top: 10px;
+    }
+
+  }
+
+  #wideTable {
+    display: none;
+  }
+
+  #narrowTable {
+    display: block;
+  }
+}
