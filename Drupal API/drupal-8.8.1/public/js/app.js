@@ -171,7 +171,7 @@ createPhotoArea = (user) => {
 
 createInfoArea = (user) => {
   const infoDiv = document.createElement("div");
-  infoDiv.className = "col-12 col-md-5 mt-3 mt-md-0";
+  infoDiv.className = "col-12 col-md-4 mt-3 mt-md-0";
 
   const name = document.createElement("p");
   name.textContent = user.field_vardas[0].value + " " + user.field_pavarde[0].value;
@@ -196,7 +196,7 @@ createInfoArea = (user) => {
 
 createRatingArea = (user) => {
   const ratingDiv = document.createElement("div");
-  ratingDiv.className = "col-12 col-md-5 d-flex flex-column align-items-end justify-content-center";
+  ratingDiv.className = "col-12 col-md-6 d-flex flex-column align-items-end justify-content-center";
 
   const rating = document.createElement("div");
   rating.className = "d-flex mr-2";

@@ -1,0 +1,28 @@
+---
+ip: "192.168.10.10"
+memory: 2048
+cpus: 2
+provider: virtualbox
+
+folders:
+    - map: ~/code
+      to: /home/vagrant/code
+sites:
+    - map: skelbimai.test
+      to: /home/vagrant/code/skelbimai/public
+    - map: db.test
+      to: /home/vagrant/code/db/public
+databases:
+    - homestead
+
+features:
+    - mariadb: false
+    - ohmyzsh: false
+    - webdriver: false
+
+# ports:
+#     - send: 50000
+#       to: 5000
+#     - send: 7777
+#       to: 777
+#       protocol: udp
