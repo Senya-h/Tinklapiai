@@ -1,0 +1,25 @@
+{% set container = theme.settings.fluid_container ? 'container-fluid' : 'container' %}
+{%
+    set navbar_classes = [
+    'navbar', 'navbar-expand-lg', 'navbar-light', 'bg-light',
+]
+%}
+
+<div class="{{ container }}">
+
+    <header>
+        <h1>Drupal API</h1>
+    </header>
+
+    <main>
+        {% if not is_front %}
+            <div>
+                {{ page.content }}
+            </div>
+        {% else %}
+            <div>
+            </div>
+        {% endif %}
+    </main>
+
+</div>
