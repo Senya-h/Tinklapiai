@@ -2,8 +2,6 @@ framework:
   css:
     theme:
       css/style.css: {}
-      css/custom.css: {}
-
 
 # Uncomment for LESS source JavaScript files.
 #  js:
