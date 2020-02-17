@@ -184,8 +184,7 @@ compatible = (user, filters) => {
       (filters.specialization === "" || filters.specialization === user.field_specializacija) &&
       (filters.service === "" || filters.service === user.field_servisas) &&
       (filters.city === "" || filters.city === user.field_miestas) &&
-      (filters.gender === "" || filters.gender === user.field_lytis) &&
-      (filters.rating === "" || filters.rating >= user.field_reitingas)) {
+      (filters.gender === "" || filters.gender === user.field_lytis)) {
 
     return true;
   }
@@ -195,7 +194,7 @@ compatible = (user, filters) => {
 
 createPhotoArea = (user) => {
   const photoDiv = document.createElement("div");
-  photoDiv.className = "col-12 col-md-2 mt-3 mt-lg-0 d-flex";
+  photoDiv.className = "col-12 col-md-2 d-flex";
   const img = document.createElement("img");
   img.src = user.field_nuotrauka;
   photoDiv.appendChild(img);
@@ -264,7 +263,7 @@ createRatingArea = (user) => {
 
 
   const circleLikeDiv = document.createElement("div");
-  circleLikeDiv.className = "likeCircle align-self-end d-flex mb-3 mb-lg-0 align-items-center justify-content-center";
+  circleLikeDiv.className = "likeCircle align-self-end d-flex align-items-center justify-content-center";
   
   circleLikeDiv.onclick = () => {
     if(circleLikeDiv.classList.contains("liked")) {
