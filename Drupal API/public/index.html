@@ -11,55 +11,56 @@
 <div class="container-fluid">
 
   <div class="content">
-  <header class="d-flex align-items-center bg-light">
-    <h1>Klientų atsiliepimai</h1>
-  </header>
+    <header class="d-flex align-items-center justify-content-center justify-content-lg-start bg-light">
+      <h1>Klientų atsiliepimai</h1>
+    </header>
 
-  <section>
-    <form method="POST" class="form-inline">
-      <div class="container">
+    <section>
+      <form method="POST" class="form-inline">
+        <div class="container">
 
-        <div class="row mt-5">
-          <input type="text" id="name" class="form-control col-12 col-lg-2 mb-2 mb-lg-0" autocomplete="off" placeholder="Paieška...">
+          <div class="selections d-flex flex-column flex-xl-row justify-content-between mt-5">
+            <input type="text" id="name" class="form-control  mb-2 mb-xl-0" autocomplete="off" placeholder="Paieška...">
 
-          <select class="custom-select col-12 col-lg-2 mb-2 mb-lg-0" id="specialization" name="specialization">
-            <option selected value="">Specializacija</option>
+            <select class="custom-select mb-2 mb-xl-0" id="specialization" name="specialization" autocomplete="off">
+              <option selected value=""> -- Specializacija -- </option>
 
-          </select>
-          <select class="custom-select col-12 col-lg-2 mb-2 mb-lg-0" id="service" name="service">
-            <option selected value="">Servisas</option>
+            </select>
+            <select class="custom-select mb-2 mb-xl-0" id="service" name="service" autocomplete="off">
+              <option selected value=""> -- Servisas -- </option>
 
-          </select>
-          <select class="custom-select col-12 col-lg-2 mb-2 mb-lg-0" id="city" name="city">
-            <option selected value="">Miestas</option>
+            </select>
+            <select class="custom-select mb-2 mb-xl-0" id="city" name="city" autocomplete="off">
+              <option selected value="">-- Miestas -- </option>
 
-          </select>
-          <select class="custom-select col-12 col-lg-2 mb-2 mb-lg-0" id="gender" name="gender">
-            <option selected value="">Lytis</option>
-            <option value="Vyras">Vyras</option>
-            <option value="Moteris">Moteris</option>
-            <option value="Kita">Kita</option>
-          </select>
-          <select class="custom-select col-12 col-lg-2" id="rating" name="rating">
-            <option selected value="">Reitingas nuo</option>
-            <option value="1">0</option>
-            <option value="2">1</option>
-            <option value="3">2</option>
-            <option value="3">3</option>
-            <option value="3">4</option>
-          </select>
+            </select>
+            <select class="custom-select mb-2 mb-xl-0" id="gender" name="gender" autocomplete="off">
+              <option selected value=""> -- Lytis -- </option>
+              <option value="Vyras">Vyras</option>
+              <option value="Moteris">Moteris</option>
+              <option value="Kita">Kita</option>
+            </select>
+            <select class="custom-select" id="rating" name="rating" autocomplete="off">
+              <option selected value=""> -- Reitingas -- </option>
+              <option value="fromMax">Nuo didžiausio</option>
+              <option value="fromMin">Nuo mažiausio</option>
+            </select>
+          </div>
         </div>
+      </form>
+    </section>
+
+    <section>
+      
+    </section>
+
+    <main class="mt-5">
+      <div class="container" id="masters">
+        <ul id="mastersList">
+          
+        </ul>
       </div>
-    </form>
-  </section>
-
-  <main class="mt-5">
-    <div class="container" id="masters">
-      <ul id="mastersList">
-
-      </ul>
-    </div>
-  </main>
+    </main>
   </div>
   <footer class="bg-dark text-light d-flex justify-content-center align-items-center">
     <p class="text-center">Žiniatinklio Programuotojo Egzamino Praktinė Užduotis</p>

@@ -1,8 +1,20 @@
-.container-fluid {
+.container-fluid, .content {
   padding: 0;
-  background-color: #ffffff;
+  background-color: #FFF;
   background-image: url("https://www.transparenttextures.com/patterns/60-lines.png");
-  /* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+}
+
+html, body, body > .container-fluid {
+  height: 100%;
+}
+
+body > .container-fluid {
+  display: flex;
+  flex-direction: column;
+}
+
+.content {
+  flex: 1 0 auto;
 }
 
 header {
@@ -25,11 +37,11 @@ ul {
   padding: 20px;
 }
 
-#mastersList .row {
+#mastersList .selections {
   padding: 20px;
 }
 
-form div.row{
+form div.selections {
   padding: 30px 15px;
   background-color: #FFF;
   justify-content: space-around;
@@ -52,7 +64,7 @@ img {
   align-self: center;
 }
 
-i.far.fa-star {
+i.far.fa-star, i.fas.fa-star {
   font-size: 20px;
 }
 
@@ -80,7 +92,8 @@ i.far.fa-heart {
 
 
 footer {
-  height: 100px;
+  height: 80px;
+  flex-shrink: 0;
 }
 
 footer p {
@@ -88,6 +101,9 @@ footer p {
   margin-bottom: 0;
 }
 
-@media (min-width: 992px) {
-
+@media (max-width: 992px) {
+  header h1 {
+  margin-bottom: 0;
+  margin-left: 0;
+  }
 }

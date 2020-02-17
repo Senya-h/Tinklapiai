@@ -9,24 +9,6 @@ package: 'Bootstrap'
 regions:
   site_name: 'Site Name'
   content: "Content"
-  header_navigation: 'Header Navigation'
-  section_navigation: 'Section Navigation'
-  events_title: "Events Title"
-  events_all: "All Events"
-  events_upcoming: "Upcoming Events"
-  main_carousel: 'Section Photos'
-  news_title: "News Title"
-  news_archive: "News Archive"
-  news: "News"
-  gallery_title: "Gallery Title"
-  gallery_archive: "Gallery Archive"
-  gallery_carousel: "Gallery"
-  collaborations_title: "Collaborations Title"
-  collaborations: "Collaborations"
-  links_title: "Links Title"
-  links: "Links"
-  footer_website: "Footer Website"
-  footer_address: "Footer Address"
 
 libraries-extend:
   bootstrap/framework:

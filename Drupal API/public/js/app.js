@@ -7,6 +7,8 @@ const genderSelect = document.getElementById("gender");
 const ratingSelect = document.getElementById("rating");
 
 let data;
+let sortedData;
+
 const filters = {
   name: "",
   specialization: "",
@@ -18,33 +20,66 @@ const filters = {
 
 nameInput.addEventListener("input", (e) => {
   filters.name = e.target.value;
-  createUsers();
+  createUsers(sortedData);
 });
 
 specializationSelect.addEventListener("change", (e) => {
   filters.specialization = e.target.value;
-  createUsers();
+  createUsers(sortedData);
 });
 
 servicesSelect.addEventListener("change", (e) => {
   filters.service = e.target.value;
-  createUsers();
+  createUsers(sortedData);
 });
 
 citiesSelect.addEventListener("change", (e) => {
   filters.city = e.target.value;
-  createUsers();
+  createUsers(sortedData);
 });
 
 genderSelect.addEventListener("change", (e) => {
   filters.gender = e.target.value;
-  createUsers();
+  createUsers(sortedData);
 });
 
 ratingSelect.addEventListener("change", (e) => {
   filters.rating = e.target.value;
-  createUsers();
+  sortedData = data;
+
+  if(e.target.value === "fromMin") {
+      const mastersArray = Array.from(mastersList.children);
+      sortedData = [...data].sort(fromMin);
+  } else if(e.target.value === "fromMax") {
+      sortedData = [...data].sort(fromMax);
+  }
+
+  createUsers(sortedData);
 });
+
+fromMin = (a, b) => {
+  const aReitingas = parseInt(a.field_reitingas);
+  const bReitingas = parseInt(b.field_reitingas);
+  if (aReitingas > bReitingas) {
+    return 1;
+  } else if (aReitingas < bReitingas) {
+    return -1;
+  }
+
+  return 0;
+}
+
+fromMax = (a, b) => {
+  const aReitingas = parseInt(a.field_reitingas);
+  const bReitingas = parseInt(b.field_reitingas);
+  if (aReitingas > bReitingas) {
+    return -1;
+  } else if (aReitingas < bReitingas) {
+    return 1;
+  }
+
+  return 0;
+}
 
 fetchMasters = async () => {
   let data = await fetch("http://saulius.web-training.lt/api?_format=json")
@@ -53,15 +88,13 @@ fetchMasters = async () => {
     return data;
 };
 
-getData = async() => {
+getData = async () => {
     data = await fetchMasters();
-
+    sortedData = data;
     populateSpecializations();
     populateServices();
     populateCities();
     createUsers();
-
-    console.log(data);
 };
 
 getData();
@@ -113,9 +146,9 @@ populateCities = () => {
 };
 
 
-createUsers = async () => {
+createUsers = async (newData = data) => {
   deleteUsers();
-  data.forEach(user => {
+  newData.forEach(user => {
 
     if(compatible(user, filters)) {
       const li = document.createElement("li");
@@ -162,7 +195,7 @@ compatible = (user, filters) => {
 
 createPhotoArea = (user) => {
   const photoDiv = document.createElement("div");
-  photoDiv.className = "col-12 col-md-2 d-flex";
+  photoDiv.className = "col-12 col-md-2 mt-3 mt-lg-0 d-flex";
   const img = document.createElement("img");
   img.src = user.field_nuotrauka;
   photoDiv.appendChild(img);
@@ -196,37 +229,59 @@ createInfoArea = (user) => {
 
 createRatingArea = (user) => {
   const ratingDiv = document.createElement("div");
-  ratingDiv.className = "col-12 col-md-6 d-flex flex-column align-items-end justify-content-center";
+  ratingDiv.className = "col-12 col-md-6 d-flex flex-column justify-content-center";
 
   const rating = document.createElement("div");
-  rating.className = "d-flex mr-2";
+  rating.className = "row p-0 mr-2 align-self-md-end";
 
   const ratingText = document.createElement("p");
+  ratingText.className = "col-12 col-md";
   ratingText.textContent = "Reitingas: ";
 
   const ratingStars = document.createElement("div");
 
+  let filledStarsCount = filledStarsCountBasedOnRating(user.field_reitingas);
+
+
   for(let i = 0; i < 5; i++) {
     const ratingStar = document.createElement("i");
-    ratingStar.className = "far fa-star";
+    if(i < filledStarsCount) {
+      ratingStar.className = "fas fa-star text-warning";
+    } else {
+      ratingStar.className = "far fa-star text-warning";
+    }
     ratingStars.appendChild(ratingStar);
   }
-  ratingStars.className = "ml-3 mr-2";
+
+  ratingStars.className = "col-12 col-md mr-1 ml-md-1 pr-0 d-flex";
   const ratingNumbers = document.createElement("p");
+  ratingNumbers.className = "ml-2";
   ratingNumbers.textContent = `(${user.field_reitingas})`;
+  ratingStars.appendChild(ratingNumbers);
 
   rating.appendChild(ratingText);
   rating.appendChild(ratingStars);
-  rating.appendChild(ratingNumbers);
+
 
   const circleLikeDiv = document.createElement("div");
-  circleLikeDiv.className = "likeCircle d-flex align-items-center justify-content-center";
+  circleLikeDiv.className = "likeCircle align-self-end d-flex mb-3 mb-lg-0 align-items-center justify-content-center";
+  
   circleLikeDiv.onclick = () => {
-    console.log("CLICKED");
-    circleLikeDiv.classList.add("liked");
+    if(circleLikeDiv.classList.contains("liked")) {
+      return;
+    };
 
-    ratingNumbers.textContent = `(${user.field_reitingas.value + 1})`;
-  };
+    circleLikeDiv.classList.add("liked");
+    const newRating = parseInt(user.field_reitingas) + 1;
+    ratingNumbers.textContent = `(${newRating})`;
+
+    if(filledStarsCount < filledStarsCountBasedOnRating(newRating)) {
+      updateStars(ratingStars, filledStarsCount + 1);
+    }
+
+    patchUserRating(user.nid, user.type, newRating);
+
+  }
   const likeButton = document.createElement("i");
   likeButton.className = "far fa-heart";
   circleLikeDiv.appendChild(likeButton);
@@ -237,8 +292,58 @@ createRatingArea = (user) => {
   return ratingDiv;
 };
 
+
+
 deleteUsers = () => {
   while(mastersList.firstChild) {
       mastersList.removeChild(mastersList.firstChild);
   }
 };
+
+filledStarsCountBasedOnRating = (rating) => {
+  if (rating < 2) {
+    return 0;
+  } else if (rating < 4) {
+    return 1;
+  } else if (rating < 6) {
+    return 2;
+  } else if (rating < 8) {
+    return 3;
+  } else if (rating < 10) {
+    return 4;
+  } 
+
+  return 5;
+};
+
+updateStars = (ratingStars, filledStarsCount) => {
+  Array.from(ratingStars.children).forEach((star, index) => {
+    if(index === filledStarsCount - 1) {
+      star.classList.remove("far");
+      star.classList.add("fas");
+    }
+  })
+};
+
+patchUserRating = (userNode, userType, newRating) => {
+  fetch(`http://saulius.web-training.lt/node/${userNode}?_format=json`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+      'X-CSRF-Token': 'ap4qotMRzS-odVAPwWCeyQM-5PKKxlhYQgIxDASx1A0'
+    },
+    body: JSON.stringify({
+      "field_reitingas": [
+        {
+          "value": newRating
+        }
+      ],
+      "type": [
+        {
+          "target_id": userType
+        }
+      ]
+    })
+  })
+};
+
